@@ -1,0 +1,9 @@
+{
+  "video": false,
+  "screenshotOnRunFailure": false,
+  "baseUrl": "https://",
+  "viewportWidth": 1920,
+  "viewportHeight": 1080,
+  "projectId": "n5h34e",
+  "testFiles": ["**/*.spec.js"]
+}
