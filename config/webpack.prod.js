@@ -3,10 +3,12 @@ const { join } = require('path');
 const ESLintPlugin = require('eslint-webpack-plugin');
 const ImageMinimizerPlugin = require('image-minimizer-webpack-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
-const { extendDefaultPlugins } = require('svgo');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const common = require('./webpack.common');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const root = join(__dirname, '../');
+const src = join(root, 'src');
 
 module.exports = merge(common, {
   mode: 'production',
@@ -18,6 +20,15 @@ module.exports = merge(common, {
     filename: '[name].[chunkhash:10].js',
     chunkFilename: '[name].[chunkhash:10].js',
     assetModuleFilename: 'assets/[name].[chunkhash:10].[ext]',
+  },
+
+  module: {
+    rules: [
+      {
+        test: /\.(sa|sc|c)ss$/i,
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader', 'sass-loader'],
+      },
+    ],
   },
 
   optimization: {
@@ -46,6 +57,20 @@ module.exports = merge(common, {
       fix: false,
       failOnError: true,
     }),
+    new HtmlWebpackPlugin({
+      template: join(root, 'public/index.ejs'),
+      templateParameters: {
+        title: 'React Hooks',
+        buildTime: '',
+        commitHash: '',
+        version: '',
+      },
+      favicon: join(src, 'assets/img', 'favicon.ico'),
+    }),
+    new MiniCssExtractPlugin({
+      filename: 'styles/[name].[contenthash:10].css',
+      chunkFilename: 'styles/[name].[contenthash:10].css',
+    }),
     new ImageMinimizerPlugin({
       minimizerOptions: {
         plugins: [
@@ -55,18 +80,12 @@ module.exports = merge(common, {
           [
             'svgo',
             {
-              plugins: extendDefaultPlugins([
+              plugins: [
                 {
-                  name: 'removeViewBox',
-                  active: false,
+                  removeViewBox: false,
+                  removeDoctype: false,
                 },
-                {
-                  name: 'addAttributesToSVGElement',
-                  params: {
-                    attributes: [{ xmlns: 'http://www.w3.org/2000/svg' }],
-                  },
-                },
-              ]),
+              ],
             },
           ],
         ],

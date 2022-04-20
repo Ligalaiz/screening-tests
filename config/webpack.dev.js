@@ -2,9 +2,13 @@ const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin'
 const { join } = require('path');
 const { merge } = require('webpack-merge');
 const common = require('./webpack.common');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 // const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const commitHash = require('child_process').execSync('git rev-parse --short HEAD').toString();
+const pkg = require('../package.json');
 
 const root = join(__dirname, '../');
+const src = join(root, 'src');
 
 module.exports = merge(common, {
   mode: 'development',
@@ -13,23 +17,42 @@ module.exports = merge(common, {
 
   output: {
     path: join(root, 'dist'),
-    filename: '[name].[hash:10].js',
-    chunkFilename: '[name].[hash:10].js',
-    assetModuleFilename: 'assets/[name].[hash:10].[ext]',
+    filename: '[name].[contenthash:10].js',
+    chunkFilename: '[name].[contenthash:10].js',
+    assetModuleFilename: 'assets/[name].[contenthash:10].[ext]',
     publicPath: '/',
   },
 
+  module: {
+    rules: [
+      {
+        test: /\.(sa|sc|c)ss$/i,
+        use: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader'],
+      },
+    ],
+  },
   devServer: {
     hot: true,
-    open: 'true',
+    open: '/',
     port: 3000,
     historyApiFallback: true,
-    contentBase: join(root, 'dist'),
   },
 
   // plugins: [new BundleAnalyzerPlugin()],
 
-  plugins: [new ReactRefreshWebpackPlugin()],
+  plugins: [
+    new ReactRefreshWebpackPlugin(),
+    new HtmlWebpackPlugin({
+      template: join(root, 'public/index.ejs'),
+      templateParameters: {
+        title: 'React Hooks',
+        buildTime: `Build at: ${new Date().toISOString()}`,
+        commitHash: `Commit hash: ${commitHash}`,
+        version: `App version ${JSON.stringify(pkg.version)}`,
+      },
+      favicon: join(src, 'assets/img', 'favicon.ico'),
+    }),
+  ],
 
   stats: {
     errorDetails: true,
