@@ -4,11 +4,10 @@ interface IColor {
 
 export const color: IColor = {
   'white-color': '#ffffff',
-  'green-color': '#26851b',
-  'green-color--light': '#0f972d85',
-  'blue-color': '#3b43b3',
-  'gray-color': '#9e9e9e',
-  'red-color--light': '#ffe5e5',
-  'black-color--light': '#d9d9e1',
-  primary: '#D43728',
+  'gray-color': '#dedede',
+  'gray-color-light': '#939292',
+  'black-color': '#000000',
+  'black-color-light': '#1c1c1c',
+  'black-color-light-X1': '#20201f',
+  'red-color': '#D00000',
 };

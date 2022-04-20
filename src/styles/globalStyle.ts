@@ -1,6 +1,6 @@
+import font from '@assets/fonts/roboto-regular.woff';
 import { css } from '@emotion/react';
 import { color } from './variables';
-import font from '@assets/fonts/roboto-regular.woff';
 
 export const globalStyle = css`
   @font-face {
@@ -56,15 +56,9 @@ export const globalStyle = css`
     font-size: 10px;
   }
 
-  .wrapper {
-    min-width: 320px;
-    width: 100vw;
-    height: 100vh;
-  }
-
   .container {
     width: 100%;
-    max-width: 800px;
+    max-width: 1024px;
     margin: 0 auto;
     padding: 0 15px;
   }
@@ -83,9 +77,7 @@ export const globalStyle = css`
     font-weight: 400;
     font-size: 16px;
     line-height: 1.5;
-    color: ${color['black-color']};
-
-    background-color: ${color['white-color']};
+    color: ${color['white-color']};
 
     user-select: none;
     -webkit-font-smoothing: antialiased;
@@ -98,13 +90,6 @@ export const globalStyle = css`
   img {
     max-width: 100%;
     height: auto;
-  }
-
-  #root {
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    padding-top: 300px;
   }
 
   .visually-hidden {
@@ -140,9 +125,6 @@ export const globalStyle = css`
 
   .wrapper {
     min-width: 320px;
-    min-height: 100vh;
-    display: grid;
-    grid-template-rows: auto 50px;
   }
 
   ::-webkit-scrollbar {
@@ -150,7 +132,7 @@ export const globalStyle = css`
   }
 
   ::-webkit-scrollbar-thumb {
-    background: ${color['grey-color']};
+    background: ${color['gray-color']};
     background-clip: padding-box;
     border-radius: 5px;
   }
