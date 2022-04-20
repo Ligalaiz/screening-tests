@@ -26,13 +26,14 @@ const Form: FC = () => {
         <h1 css={f.title}>Регистрация</h1>
         <p css={f.subtitle}>Введите свои данные</p>
       </div>
-      <form onSubmit={handleSubmit(onSubmit)} css={f.form}>
+      <form onSubmit={handleSubmit(onSubmit)} css={f.form} data-testid="form">
         <div css={f.fieldWrap}>
           <input
             {...register('name')}
             type="text"
             css={f.field}
             placeholder=" "
+            data-testid="nameField"
           />
           <label>Имя</label>
         </div>
@@ -42,6 +43,7 @@ const Form: FC = () => {
             type="text"
             css={f.field}
             placeholder=" "
+            data-testid="nicknameField"
           />
           <label>Никнейм</label>
         </div>
@@ -51,6 +53,7 @@ const Form: FC = () => {
             type="email"
             css={f.field}
             placeholder=" "
+            data-testid="emailField"
           />
           <label>email</label>
         </div>
@@ -60,6 +63,7 @@ const Form: FC = () => {
             type="tel"
             css={f.fieldError}
             placeholder=" "
+            data-testid="phoneField"
           />
           <label>Телефон</label>
         </div>
@@ -69,18 +73,26 @@ const Form: FC = () => {
             type={isHidden ? 'password' : 'text'}
             css={f.password}
             placeholder=" "
+            data-testid="passwordField"
           />
           <label>Пароль</label>
         </div>
         <label css={f.acceptLabel}>
-          <input {...register('accept')} type="checkbox" css={f.accept} />
+          <input
+            {...register('accept')}
+            type="checkbox"
+            css={f.accept}
+            data-testid="acceptField"
+          />
           <i className="accept" css={f.acceptSquare} />
           <span css={f.acceptText}>
             Я даю свое согласие на обработку персональных данных
           </span>
         </label>
 
-        <button css={f.buttonSbt}>Зарегистрироваться</button>
+        <button css={f.buttonSbt} data-testid="formBtn">
+          Зарегистрироваться
+        </button>
       </form>
       <p css={f.question}>
         Есть аккаунт?{' '}
