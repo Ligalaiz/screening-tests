@@ -1,11 +1,10 @@
 import React, { FC } from 'react';
-import { observer } from 'mobx-react';
 import { githubCorner } from './GitLinkStyle';
 
-const GitLink: FC = observer(() => {
+const GitLink: FC = () => {
   return (
     <a
-      href="https://github.com/Ligalaiz/StarDB"
+      href="https://github.com/Ligalaiz/screening-tests/tree/registration-form"
       target="_blank"
       aria-label="View source on Github"
       rel="noreferrer"
@@ -30,6 +29,6 @@ const GitLink: FC = observer(() => {
       </svg>
     </a>
   );
-});
+};
 
 export { GitLink };
