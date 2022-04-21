@@ -6,11 +6,12 @@ import React from 'react';
 const renderComponent = () => render(<Message />);
 
 describe('Message component', () => {
-  describe('Component not exist', () => {
-    it('message check that the component has not been rendered #test', () => {
-      const { queryByTestId } = renderComponent();
+  describe('Component exist', () => {
+    it('message check that the component has been rendered #test', () => {
+      const { getByTestId } = renderComponent();
 
-      expect(queryByTestId('registrationForm')).not.toBeInTheDocument();
+      expect(getByTestId('message')).toBeInTheDocument();
+      expect(getByTestId('messageText')).toBeInTheDocument();
     });
   });
 });
