@@ -1,29 +1,22 @@
-import React, { FC, MouseEvent } from 'react';
-import * as btn from './ButtonStyle';
+import React, { FC } from 'react';
+import * as b from './Button.style';
 
 interface IButton {
   type?: 'button' | 'submit' | 'reset' | undefined;
-  isDisabled?: boolean;
   name?: string;
-  handleClick?: (e: MouseEvent<HTMLButtonElement>) => void;
   testid?: string;
+  children: string;
+  disabled: boolean;
 }
 
-const Button: FC<IButton> = ({
-  children,
-  type = 'button',
-  name,
-  handleClick,
-  isDisabled,
-  testid,
-}) => {
+const Button: FC<IButton> = ({ children, type = 'button', name, testid, disabled }) => {
   return (
     <button
+      disabled={disabled}
+      css={disabled ? b.formBtnDisabled : b.formBtn}
       data-testid={testid}
       type={type || 'button'}
-      name={name}
-      onClick={handleClick}
-      disabled={isDisabled}
+      data-name={name}
     >
       {children}
     </button>
