@@ -15,13 +15,13 @@ export const title = css`
   font-family: 'Roboto';
   font-weight: 500;
   font-size: 4.7rem;
-  line-height: 55px;
   color: ${color['black-color-light']};
+  line-height: 55px;
 `;
 
 export const subtitle = css`
   font-family: 'Roboto';
   font-size: 1.5rem;
-  line-height: 18px;
   color: ${color['black-color-light']};
+  line-height: 18px;
 `;
