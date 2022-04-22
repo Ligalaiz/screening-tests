@@ -1,16 +1,21 @@
-import { delay } from '.';
+import { delay } from './delay.utils';
 
 jest.useFakeTimers();
+const data = true;
 
-describe('Delay function', () => {
-  it('delay function check was called after 1 second', () => {
-    const callback = jest.fn();
+test('doAsync calls both callbacks', () => {
+  expect.assertions(2);
 
-    delay(1000, callback);
+  function callback1() {
+    expect(data).toBeTruthy();
+  }
 
-    jest.advanceTimersByTime(1000);
+  function callback2() {
+    expect(data).toBeTruthy();
+  }
 
-    expect(callback).toBeCalled();
-    expect(callback).toHaveBeenCalledTimes(1);
-  });
+  delay(callback1, 1000);
+  delay(callback2, 1000);
+
+  jest.runAllTimers();
 });

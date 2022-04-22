@@ -1,9 +1,6 @@
-const delay = (ms: number, callback?: jest.Mock<any, any>) =>
-  new Promise<void>((res) =>
-    setTimeout(() => {
-      res();
-      if (typeof callback === 'function') callback();
-    }, ms),
-  );
+const delay = (cb: () => void, ms: number) =>
+  setTimeout(() => {
+    cb();
+  }, ms);
 
 export { delay };
