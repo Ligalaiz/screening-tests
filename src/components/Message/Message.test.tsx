@@ -7,7 +7,7 @@ const renderComponent = () => render(<Message />);
 
 describe('Message component', () => {
   describe('Component exist', () => {
-    it('message check that the component has been rendered #test', () => {
+    it('message check that the component has been rendered', () => {
       const { getByTestId } = renderComponent();
 
       expect(getByTestId('message')).toBeInTheDocument();
