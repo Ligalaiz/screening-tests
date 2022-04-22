@@ -1,10 +1,7 @@
 import React from 'react';
 import { loader } from './LoaderStyle';
-import { TodoStore } from '@src/store';
 
-const Loader = () => {
-  const { isLoading } = TodoStore;
-
+const Loader = (isLoading: boolean) => {
   if (!isLoading) return null;
 
   return <div css={loader} />;
